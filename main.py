@@ -14,7 +14,23 @@ def download_video(url, save_path):
         print(e)
 
 
-url = ""
-save_path = ""
+def open_file_folder():
+    folder = filedialog.askdirectory()
+    if folder:
+        print(f"Selected folder: {folder}")
 
-download_video(url, save_path)
+    return folder
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    #root.withdraw()
+
+    video_url = input("Enter a youtube url: ")
+    save_directory = open_file_folder()
+
+    if save_directory:
+        print("Starting download...")
+        download_video(video_url, save_directory)
+    else:
+        print("Invalid save location")
