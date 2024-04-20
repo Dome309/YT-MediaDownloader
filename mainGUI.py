@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from tkinter import filedialog
 from downloader import download_media
 
@@ -28,28 +29,28 @@ def build_components():
     welcome_label = tk.Label(root, text="Welcome to YouTube Media Downloader", font=("Helvetica", 18))
     welcome_label.pack(pady=20)
 
-    description_label = tk.Label(root, text="To begin, please paste a YouTube URL, select the desired format type, "
+    description_label = tk.Label(root, text="Paste a YouTube URL, select the desired format type, "
                                             "and specify the save directory", font=14)
-    description_label.pack(pady=(0, 20))
+    description_label.pack(pady=(0, 40))
 
-    url_entry = tk.Entry(root, width=50, fg='grey')
+    url_frame = tk.Frame(root)
+    url_frame.pack()
+
+    url_entry = tk.Entry(url_frame, width=50, font=("Helvetica", 14), fg='grey')
     url_entry.insert(0, "Enter the YouTube video URL")
     url_entry.bind("<FocusIn>", lambda event: on_entry_click(url_entry))
     url_entry.bind("<FocusOut>", lambda event: on_focusout(url_entry))
-    url_entry.pack()
+    url_entry.pack(side=tk.LEFT, padx=0)
 
     format_choice = tk.StringVar()
     format_choice.set("mp4")
 
-    mp4_radio = tk.Radiobutton(root, text="MP4", variable=format_choice, value="mp4")
-    mp4_radio.pack()
+    format_menu = ttk.Combobox(url_frame, textvariable=format_choice, values=["mp4", "mp3"], width=5)
+    format_menu.pack(side=tk.LEFT)
 
-    mp3_radio = tk.Radiobutton(root, text="MP3", variable=format_choice, value="mp3")
-    mp3_radio.pack()
-
-    browse_button = tk.Button(root, text="Browse",
-                              command=lambda: browse_button_clicked(url_entry, format_choice, status_label))
-    browse_button.pack()
+    browse_button = ttk.Button(root, text="Browse",
+                               command=lambda: browse_button_clicked(url_entry, format_choice, status_label))
+    browse_button.pack(pady=20)
 
     status_label = tk.Label(root, text="")
     status_label.pack()
@@ -70,7 +71,7 @@ if __name__ == "__main__":
     root.title("YouTube Media Downloader")
     window_width = 800
     window_height = 400
-    root.minsize(window_width, window_height)
+    root.minsize(600, 250)
 
     build_components()
 
