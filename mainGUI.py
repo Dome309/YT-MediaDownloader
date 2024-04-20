@@ -55,11 +55,25 @@ def build_components():
     status_label.pack()
 
 
+def center_window(window, width, height):
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    window.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+
+
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("YouTube Media Downloader")
-    root.minsize(800, 400)
+    window_width = 800
+    window_height = 400
+    root.minsize(window_width, window_height)
 
     build_components()
+
+    center_window(root, window_width, window_height)
 
     root.mainloop()
