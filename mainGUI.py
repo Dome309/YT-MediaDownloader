@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 from downloader import download_media
+from tkinter import PhotoImage
 
 
 def on_entry_click(url_entry):
@@ -26,11 +27,12 @@ def browse_button_clicked(url_entry, format_choice, status_label):
 
 
 def build_components():
-    welcome_label = tk.Label(root, text="Welcome to YouTube Media Downloader", font=("Helvetica", 18))
+    welcome_label = tk.Label(root, text="Welcome to YouTube Media Downloader", font=("Helvetica", 18),
+                             background="white")
     welcome_label.pack(pady=20)
 
     description_label = tk.Label(root, text="Paste a YouTube URL, select the desired format type, "
-                                            "and specify the save directory", font=14)
+                                            "and specify the save directory", font=14, background="white")
     description_label.pack(pady=(0, 40))
 
     url_frame = tk.Frame(root)
@@ -45,15 +47,36 @@ def build_components():
     format_choice = tk.StringVar()
     format_choice.set("mp4")
 
-    format_menu = ttk.Combobox(url_frame, textvariable=format_choice, values=["mp4", "mp3"], width=5)
+    format_menu = ttk.Combobox(url_frame, textvariable=format_choice, values=["mp4", "mp3"], width=5, state="readonly")
     format_menu.pack(side=tk.LEFT)
 
     browse_button = ttk.Button(root, text="Browse",
                                command=lambda: browse_button_clicked(url_entry, format_choice, status_label))
     browse_button.pack(pady=20)
 
-    status_label = tk.Label(root, text="")
+    status_label = tk.Label(root, text="", background="white")
     status_label.pack()
+
+    global image
+    global image2
+    global image3
+    image = PhotoImage(file="images/circle1.png")
+    image2 = PhotoImage(file="images/circle2.png")
+    image3 = PhotoImage(file="images/circle3.png")
+
+    # Creazione di un Frame per contenere le immagini
+    image_frame = tk.Frame(root, background="white")
+    image_frame.pack()
+
+    # Widget Label per mostrare le immagini
+    image_label = tk.Label(image_frame, image=image, borderwidth=0, relief="flat", background="white")
+    image_label.pack(side="left")
+
+    image_label2 = tk.Label(image_frame, image=image2, borderwidth=0, relief="flat", background="white")
+    image_label2.pack(side="left")
+
+    image_label3 = tk.Label(image_frame, image=image3, borderwidth=0, relief="flat", background="white")
+    image_label3.pack(side="left")
 
 
 def center_window(window, width, height):
@@ -69,10 +92,10 @@ def center_window(window, width, height):
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("YouTube Media Downloader")
-    window_width = 800
-    window_height = 400
+    window_width = 900
+    window_height = 500
     root.minsize(600, 250)
-
+    root.configure(bg="white")
     build_components()
 
     center_window(root, window_width, window_height)
