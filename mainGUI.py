@@ -31,8 +31,8 @@ def build_components():
                              background="white")
     welcome_label.pack(pady=20)
 
-    description_label = tk.Label(root, text="Paste a YouTube URL, select the desired format type, "
-                                            "and specify the save directory", font=14, background="white")
+    description_label = tk.Label(root, text="Unlock the convenience of downloading either MP4 or MP3 "
+                                            "files directly from YouTube links", font=14, background="white")
     description_label.pack(pady=(0, 40))
 
     url_frame = tk.Frame(root)
@@ -64,19 +64,29 @@ def build_components():
     image2 = PhotoImage(file="images/circle2.png")
     image3 = PhotoImage(file="images/circle3.png")
 
-    # Creazione di un Frame per contenere le immagini
     image_frame = tk.Frame(root, background="white")
     image_frame.pack()
 
-    # Widget Label per mostrare le immagini
     image_label = tk.Label(image_frame, image=image, borderwidth=0, relief="flat", background="white")
-    image_label.pack(side="left")
+    image_label.pack(side="left", pady=20)
 
     image_label2 = tk.Label(image_frame, image=image2, borderwidth=0, relief="flat", background="white")
-    image_label2.pack(side="left")
+    image_label2.pack(side="left", padx=200)
 
     image_label3 = tk.Label(image_frame, image=image3, borderwidth=0, relief="flat", background="white")
     image_label3.pack(side="left")
+
+    description_frame = tk.Frame(root, background="white")
+    description_frame.pack()
+
+    circle1_label = tk.Label(description_frame, text="Paste a YouTube URL", font=14, background="white")
+    circle1_label.pack(side="left", padx=10)
+
+    circle2_label = tk.Label(description_frame, text="Select the desired format type", font=14, background="white")
+    circle2_label.pack(side="left", padx=100)
+
+    circle3_label = tk.Label(description_frame, text="Specify the save directory", font=14, background="white")
+    circle3_label.pack(side="right")
 
 
 def center_window(window, width, height):
