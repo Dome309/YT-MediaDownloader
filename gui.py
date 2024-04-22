@@ -23,7 +23,7 @@ def browse_button_clicked(url_entry, format_choice, status_label):
     if url and save_directory:
         download_media(url, save_directory, format_choice.get(), status_label)
     else:
-        status_label.config(text="Please provide a YouTube URL and select a directory.")
+        status_label.config(text="Please provide a YouTube URL and select a directory")
 
 
 def build_gui(root, window_width, window_height):
@@ -52,8 +52,12 @@ def build_gui(root, window_width, window_height):
     format_menu = ttk.Combobox(url_frame, textvariable=format_choice, values=["mp4", "mp3"], width=5, state="readonly")
     format_menu.pack(side=tk.LEFT)
 
-    browse_button = ttk.Button(root, text="Browse",
-                               command=lambda: browse_button_clicked(url_entry, format_choice, status_label))
+    global img_btn
+    img_btn = PhotoImage(file="images/button1.png")
+
+    browse_button = tk.Button(root, image=img_btn,
+                              command=lambda: browse_button_clicked(url_entry, format_choice, status_label),
+                              borderwidth=0, relief="flat", background="white")
     browse_button.pack(pady=20)
 
     status_label = tk.Label(root, text="", background="white")
