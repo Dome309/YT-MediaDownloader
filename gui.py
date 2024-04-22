@@ -26,7 +26,9 @@ def browse_button_clicked(url_entry, format_choice, status_label):
         status_label.config(text="Please provide a YouTube URL and select a directory.")
 
 
-def build_components():
+def build_gui(root, window_width, window_height):
+    center_window(root, window_width, window_height)
+
     welcome_label = tk.Label(root, text="Welcome to YouTube Media Downloader", font=("Helvetica", 18),
                              background="white")
     welcome_label.pack(pady=20)
@@ -97,17 +99,3 @@ def center_window(window, width, height):
     y = (screen_height - height) // 2
 
     window.geometry('{}x{}+{}+{}'.format(width, height, x, y))
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("YouTube Media Downloader")
-    window_width = 900
-    window_height = 500
-    root.minsize(600, 250)
-    root.configure(bg="white")
-    build_components()
-
-    center_window(root, window_width, window_height)
-
-    root.mainloop()
